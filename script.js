@@ -17,7 +17,7 @@ var passCriteria = [];
 var lower=  'q w e r t y u i o p a s d f g h j k l z x c v b n m';
 var upper=  'Q W E R T Y U I O P A S D F G H J K L Z X C V B N M';
 var numeric= '1 2 3 4 5 6 7 8 9 0';
-var special= "! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ ` { | } ~";
+var special= "! \" # $ % & ' ( ) * + - . / : ; < = > ? @ [ ] ^ _ ` { | } ~";
 var newPass=[];
 var combine=[];
 var index=0;
@@ -63,9 +63,7 @@ if (confirm("Include lowercase?")==true) {
         passCriteria.push(false);
       }
     
- console.log(passCriteria);
- console.log(combine);
- console.log(newPass);
+
    createPassword();
    return;
 } 
@@ -76,15 +74,27 @@ if (confirm("Include lowercase?")==true) {
       return;
     }
     else {
-     var i = parseInt(passCriteria[0] - 4);
+     var i = parseInt(passCriteria[0] - newPass.length);
       for ( i; i > 0; i--) {
 
       index = [Math.floor(Math.random() * combine.length)];
        newPass.push(combine[index]);
       }
-      console.log(passCriteria);
-      console.log(combine);
-      console.log(newPass);
+
+      jumbleTumble(); 
       return;
      }
+    }
+
+    function jumbleTumble() {
+      for (var i = 0; i < 100; i++) {
+        index = Math.floor(Math.random() * newPass.length);
+        let rand = newPass.splice(index, 1);
+        rand = rand.toString();
+        newPass.unshift(rand);
+      }
+      newPass = newPass.toString();
+      newPass = newPass.replace(RegExp(',', 'g'), '');
+      console.log(newPass);
+      return;
     }
