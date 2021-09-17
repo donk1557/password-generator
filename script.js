@@ -13,10 +13,16 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+var passCriteria = [];
+var lower=  'q w e r t y u i o p a s d f g h j k l z x c v b n m';
+var upper=  'Q W E R T Y U I O P A S D F G H J K L Z X C V B N M';
+var numeric= '1 2 3 4 5 6 7 8 9 0';
+var special= "! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ ] ^ _ ` { | } ~";
+var newPass=[];
+var combine=[];
+var index=0;
 
-
- function generatePassword() {
- var passCriteria = [];
+function generatePassword() {
  let num = prompt("Enter number of characters", "8-128");
  if (num > 7 && num < 129) {
    passCriteria.push(num);
@@ -25,40 +31,60 @@ generateBtn.addEventListener("click", writePassword);
    return;
  }
 if (confirm("Include lowercase?")==true) {
-  passCriteria.push(true); }
+   lower = lower.split(' ');
+   index = Math.floor(Math.random() * lower.length);
+   newPass.push(lower[index]);
+   combine = combine.concat(lower); }
   else{
     passCriteria.push(false);
   }
   if (confirm("Include uppercase?")==true) {
-    passCriteria.push(true); }
+   upper = upper.split(' ');
+     index = Math.floor(Math.random() * upper.length);
+     newPass.push(upper[index]);
+    combine = combine.concat(upper); }
     else{
     passCriteria.push(false);
     }
   if (confirm("Include numeric?")==true) {
-    passCriteria.push(true); }
+    numeric = numeric.split(' ');
+     index = Math.floor(Math.random() * numeric.length);
+     newPass.push(numeric[index]);
+    combine = combine.concat(numeric); }
     else{
     passCriteria.push(false);
     }
   if (confirm("Include special characters?")==true) {
-    passCriteria.push(true); }
+    special = special.split(' ');
+    index = Math.floor(Math.random() * special.length);
+    newPass.push(special[index]);
+    combine = combine.concat(special); }
       else{
         passCriteria.push(false);
       }
+    
+ console.log(passCriteria);
+ console.log(combine);
+ console.log(newPass);
+   createPassword();
+   return;
+} 
 
+   function createPassword() {
+    if (passCriteria[4] == false) {
+      alert("No selections made. Password generation terminated.");
+      return;
+    }
+    else {
+     var i = parseInt(passCriteria[0] - 4);
+      for ( i; i > 0; i--) {
 
-createPassword();
-}
-
-function createPassword() {
-
-var lower= 'qwertyuiopasdfghjklzxcvbnm';
-var upper= 'QWERTYUIOPASDFGHJKLZXCVBNM';
-var numeric='1234567890';
-var special=" !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
-
-
-
-
-
-
-}
+      index = [Math.floor(Math.random() * combine.length)];
+       newPass.push(combine[index]);
+      }
+      console.log(passCriteria);
+      console.log(combine);
+      console.log(newPass);
+      return;
+     }
+    }
