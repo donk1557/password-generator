@@ -22,79 +22,77 @@ var newPass=[];
 var combine=[];
 var index=0;
 
-function generatePassword() {
+function generatePassword() {           //prompts for selection of criteria
  let num = prompt("Enter number of characters", "8-128");
  if (num > 7 && num < 129) {
    passCriteria.push(num);
- } else {
+  } else {
    alert("Must choose a number between 8 and 128!");
    return;
- }
-if (confirm("Include lowercase?")==true) {
+  }
+  if (confirm("Include lowercase?")==true) {    //seeds code with 1 character from selection then concatenates character bank into main array
    lower = lower.split(' ');
    index = Math.floor(Math.random() * lower.length);
    newPass.push(lower[index]);
-   combine = combine.concat(lower); }
-  else{
+   combine = combine.concat(lower); 
+  } else{
     passCriteria.push(false);
   }
   if (confirm("Include uppercase?")==true) {
    upper = upper.split(' ');
-     index = Math.floor(Math.random() * upper.length);
-     newPass.push(upper[index]);
-    combine = combine.concat(upper); }
-    else{
+    index = Math.floor(Math.random() * upper.length);
+    newPass.push(upper[index]);
+    combine = combine.concat(upper); 
+  } else{
     passCriteria.push(false);
-    }
+  }
   if (confirm("Include numeric?")==true) {
     numeric = numeric.split(' ');
-     index = Math.floor(Math.random() * numeric.length);
-     newPass.push(numeric[index]);
-    combine = combine.concat(numeric); }
-    else{
+    index = Math.floor(Math.random() * numeric.length);
+    newPass.push(numeric[index]);
+    combine = combine.concat(numeric); 
+  } else{
     passCriteria.push(false);
-    }
+  }
   if (confirm("Include special characters?")==true) {
     special = special.split(' ');
     index = Math.floor(Math.random() * special.length);
     newPass.push(special[index]);
-    combine = combine.concat(special); }
-      else{
-        passCriteria.push(false);
-      }
-    
-
-   createPassword();
-   return;
+    combine = combine.concat(special); 
+  } else{
+      passCriteria.push(false);
+    }
+  
+  createPassword();
+  return;
 } 
 
-   function createPassword() {
-    if (passCriteria[4] == false) {
-      alert("No selections made. Password generation terminated.");
-      return;
-    }
-    else {
-     var i = parseInt(passCriteria[0] - newPass.length);
-      for ( i; i > 0; i--) {
+function createPassword() {   //randomly generates rest of password using concatenated character bank
+  if (passCriteria[4] == false) {
+    alert("No selections made. Password generation terminated."); //code for 0 selections specified
+    return;
+  } else {
+    var i = parseInt(passCriteria[0] - newPass.length);
 
-      index = [Math.floor(Math.random() * combine.length)];
-       newPass.push(combine[index]);
-      }
-
-      jumbleTumble(); 
-      return;
-     }
+    for ( i; i > 0; i--) {
+    index = [Math.floor(Math.random() * combine.length)];
+      newPass.push(combine[index]);
     }
 
-    function jumbleTumble() {
-      for (var i = 0; i < 100; i++) {
-        index = Math.floor(Math.random() * newPass.length);
-        let rand = newPass.splice(index, 1);
-        rand = rand.toString();
-        newPass.unshift(rand);
-      }
-      newPass = newPass.toString();
-      newPass = newPass.replace(RegExp(',', 'g'), '');
-      console.log(newPass);
-      return;
-    }
+    jumbleTumble(); 
+    return;
+  }
+}
+
+function jumbleTumble() {  //ensures password is purely random by removing items from password array and adding that item back to it
+  for (var i = 0; i < 100; i++) {
+    index = Math.floor(Math.random() * newPass.length);
+    let rand = newPass.splice(index, 1);
+    rand = rand.toString();
+    newPass.unshift(rand);
+  }
+  newPass = newPass.toString();                 // returns password as a string with no commas
+  newPass = newPass.replace(RegExp(',', 'g'), '');
+  alert("Password:  " + newPass);
+  return;
+}
