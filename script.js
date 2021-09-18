@@ -3,7 +3,7 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = jumbleTumble();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -72,7 +72,7 @@ function createPassword() {   //randomly generates rest of password using concat
     alert("No selections made. Password generation terminated."); //code for 0 selections specified
     return;
   } else {
-    var i = parseInt(passCriteria[0] - newPass.length);
+    var i = parseInt(passCriteria[0] - newPass.length);    //parseInt turns string value to actual numeric
 
     for ( i; i > 0; i--) {
     index = [Math.floor(Math.random() * combine.length)];
@@ -94,5 +94,5 @@ function jumbleTumble() {  //ensures password is purely random by removing items
   newPass = newPass.toString();                 // returns password as a string with no commas
   newPass = newPass.replace(RegExp(',', 'g'), '');
   alert("Password:  " + newPass);
-  return;
+  return newPass;
 }
