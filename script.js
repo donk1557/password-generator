@@ -2,14 +2,14 @@
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
-  var password = jumbleTumble();
-  var passwordText = document.querySelector("#password");
+// function writePassword() {
+//   var password = generatePassword(newPass);
+//   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+//   passwordText.value = password;
 
 
-}
+// }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
@@ -93,6 +93,15 @@ function jumbleTumble() {  //ensures password is purely random by removing items
   }
   newPass = newPass.toString();                 // returns password as a string with no commas
   newPass = newPass.replace(RegExp(',', 'g'), '');
-  alert("Password:  " + newPass);
-  return newPass;
+  // alert("Password:  " + newPass);
+  return;
+}
+
+function writePassword() {
+  var password = newPass;
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+
+
 }
